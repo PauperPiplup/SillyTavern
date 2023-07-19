@@ -312,7 +312,7 @@ function logObjectStructure(obj, indent = 0, depth = Infinity) {
 class Client {
     gql_url = "https://poe.com/api/gql_POST";
     gql_recv_url = "https://poe.com/api/receive_POST";
-    home_url = "https://poe.com";
+    home_url = "https://poe.com/Sage";
     settings_url = "https://poe.com/api/settings";
 
     formkey = "";
@@ -381,6 +381,7 @@ class Client {
         await this.connect_ws();
         console.log('Client initialized.');
     }
+    
 
     get_device_id() {
         const user_id = this.viewer["poeUser"]["id"];
@@ -397,7 +398,7 @@ class Client {
         const botNameKeyName = 'chatOfBotHandle'
         const defaultBotKeyName = 'defaultBotNickname'
 
-        const r = await request_with_retries(() => this.session.get(this.home_url));
+        const r = await request_with_retries(() => this.session.post(this.home_url));
         const jsonRegex = /<script id="__NEXT_DATA__" type="application\/json">(.+?)<\/script>/;
         const jsonText = jsonRegex.exec(r.data)[1];
         const nextData = JSON.parse(jsonText);
